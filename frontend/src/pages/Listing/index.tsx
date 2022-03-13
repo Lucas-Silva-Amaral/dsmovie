@@ -23,14 +23,18 @@ const Listing = () => {
     axios
       .get(`${BASE_URL}/movies?size=12&page=${pageNumber}&sort=id`)
       .then((response) => {
-        const data = response.data as MoviePage
+        const data = response.data
         setPage(data)
       })
   }, [pageNumber])
 
+  const handlePageChange = (newPageNumber: number) => {
+    setPageNumber(newPageNumber)
+  }
+
   return (
     <>
-      <Pagination />
+      <Pagination onChange={handlePageChange} page={page} />
 
       <div className="container">
         <div className="row">
